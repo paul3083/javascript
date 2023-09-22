@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let num = [1,2,3,4,5,6,7,8,9,10];
+    function isOdd(element) {
+        return (element%2 !== 0);
+    }
+    function isEven(element) {
+        return (element%2 === 0);
+    }
+    let odd = num.filter(isOdd);
+    document.write(`홀수 : ${odd}<br />`);
+    let even = num.filter(isEven);
+    document.write(`짝수 : ${even}`);
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>덧셈 계산기입니다. 버튼을 눌러 숫자를 입력해주세요</h1>
+    <h1 id="test">덧셈결과</h1>
+    <h1 id="name">이름</h1>
+    <button onclick="printnum()">더하기 계산하기</button>
+    <button onclick="printname()">이름 출력하기</button>
+    <script>
+        let x=parseInt(prompt("더하고 싶은 첫번째 숫자를 입력해주세요"));
+        let y=parseInt(prompt("더하고 싶은 두번째 숫자를 입력해주세요"));
+        let z=x+y;
+        let str1 = prompt("이름을 입력해주세요");
+        function printnum(){
+            document.getElementById("test").innerHTML =z;
+        }
+        function printname(){
+            document.getElementById("name").innerHTML =str1;
+        }
+    </script>
+</body>
+</html>
