@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function cal() {
+            let answer = document.getElementById('answer').value;
+            let s = document.getElementById('problem').value;
+            let solution;
+
+            try {
+                solution = eval(s);
+                if (!isNaN(solution)) {
+                    if (answer == solution) {
+                        alert("정답!");
+                    } else {
+                        alert("틀렸습니다! 정답은 " + solution);
+                    }
+                } else {
+                    alert("올바른 수식을 입력하세요.");
+                }
+            } catch (error) {
+                alert("올바른 수식을 입력하세요.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Math Quiz</h1>
+    <input type="text" id="problem" placeholder="수식을 입력하세요"><br>
+    <input type="text" id="answer" placeholder="정답을 입력하세요">
+    <button onclick="cal()">정답 알아보기</button>
+</body>
+</html>

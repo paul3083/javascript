@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function checkLength(elem, min, max) {
+            let s = elem.value;
+            const length = s.length;
+            if (length >= min && length <= max) {
+                alert('입력한 문자의 길이는 ' + length + '입니다.');
+            } else {
+                alert('문자의 길이는 ' + min + '에서 ' + max + ' 사이어야 합니다.');
+            }
+        }
+    </script>
+    <form>
+        이름(6-8 문자): <input type='text' id='name' />
+        <input type='button'
+            onclick="checkLength(document.getElementById('name'), 6, 8)"
+            value='확인' />
+    </form>
+</body>
+</html>
