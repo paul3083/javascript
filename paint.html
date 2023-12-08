@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<style>
+#myCanvas {
+    background-color: rgb(241, 239, 209);
+    border: 1px dotted blue;
+}
+</style>
+<body>
+    <label for="colorPicker">색상 선택:</label>
+    <input type="color" id="colorPicker" value="#000000">
+
+    <label for="thicknessRange">선의 굵기 선택:</label>
+    <input type="range" id="thicknessRange" min="1" max="10" value="2">
+
+    <label for="lineStyle">선의 종류 선택:</label>
+    <select id="lineStyle">
+        <option value="solid">실선</option>
+        <option value="dashed">대시선</option>
+        <option value="dotted">점선</option>
+    </select>
+
+    <button onclick="clearCanvas();">화면 지우기</button><br>
+
+    <button onclick="drawRectangle();">사각형 그리기</button>
+    <button onclick="drawCircle();">원 그리기</button>
+
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let context = canvas.getContext("2d");
+        let last_x = 0, last_y = 0;
+        let draw_mode = false;
+        let selectedShape = "line"; // Default to drawing lines
+
+        canvas.addEventListener("mousemove", function (event) {
+            if (!draw_mode) return;
+            let x = event.offsetX;
+            let y = event.offsetY;
+            context.lineTo(x, y);
+            context.stroke();
+            last_x = x;
+            last_y = y;
+        });
+
+        canvas.addEventListener("mousedown", function (event) {
+            last_x = event.offsetX;
+            last_y = event.offsetY;
+            context.beginPath();
+            context.moveTo(last_x, last_y);
+            draw_mode = true;
+        });
+
+        canvas.addEventListener("mouseup", function (event) {
+            draw_mode = false;
+        });
+
+        canvas.addEventListener("mouseout", function (event) {
+            draw_mode = false;
+        });
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        document.getElementById("colorPicker").addEventListener("input", function (event) {
+            context.strokeStyle = event.target.value;
+        });
+
+        document.getElementById("thicknessRange").addEventListener("input", function (event) {
+            context.lineWidth = event.target.value;
+        });
+
+        document.getElementById("lineStyle").addEventListener("change", function (event) {
+            context.setLineDash([]); // Reset line dash to solid
+            switch (event.target.value) {
+                case "dashed":
+                    context.setLineDash([5, 5]); // Set line dash for dashed style
+                    break;
+                case "dotted":
+                    context.setLineDash([2, 2]); // Set line dash for dotted style
+                    break;
+                // case "solid": // Default is solid line, no need to setLineDash
+                //     break;
+            }
+        });
+
+        function drawRectangle() {
+            selectedShape = "rectangle";
+        }
+
+        function drawCircle() {
+            selectedShape = "circle";
+        }
+
+        canvas.addEventListener("click", function (event) {
+            if (selectedShape === "rectangle") {
+                drawRectangleAt(event.offsetX, event.offsetY);
+            } else if (selectedShape === "circle") {
+                drawCircleAt(event.offsetX, event.offsetY);
+            }
+        });
+
+        function drawRectangleAt(x, y) {
+            const width = 50;
+            const height = 30;
+            context.beginPath();
+            context.rect(x - width / 2, y - height / 2, width, height);
+            context.stroke();
+        }
+
+        function drawCircleAt(x, y) {
+            const radius = 25;
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI);
+            context.stroke();
+        }
+    </script>
+</body>
+</html>
